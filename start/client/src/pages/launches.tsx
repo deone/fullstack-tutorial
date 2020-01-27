@@ -23,7 +23,7 @@ export const LAUNCH_TILE_DATA = gql`
 `;
 
 export const GET_LAUNCHES = gql`
-  query GetLaunchList($after: String) {
+  query launchList($after: String) {
     launches(after: $after) {
       cursor
       hasMore
@@ -49,7 +49,8 @@ const Launches: React.FC<LaunchesProps> = () => {
   >(GET_LAUNCHES);
 
   if (loading) return <Loading />;
-  if (error || !data) return <p>ERROR</p>;
+  if (error) return <p>ERROR</p>;
+  if (!data) return <p>Not found</p>;
 
   return (
     <Fragment>
